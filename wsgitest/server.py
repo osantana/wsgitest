@@ -16,6 +16,8 @@ except ImportError:
 from werkzeug.serving import run_simple
 from werkzeug.wrappers import Response
 
+from .utils import get_application
+
 
 class CheckApplicationMiddleware(object):
     def __init__(self, application):
@@ -34,6 +36,10 @@ class WSGITestServer(multiprocessing.Process):
         self.host = host or "127.0.0.1"
         self.port = port or self._get_free_port()
         self.application_url = "http://{}:{}/".format(self.host, self.port)
+
+        if not callable(application):
+            application = get_application(application)
+
         self.application = CheckApplicationMiddleware(application)
 
     def _get_free_port(self):

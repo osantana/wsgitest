@@ -34,6 +34,14 @@ class ServerTestCase(TestCase):
         with self.assertRaises(ConnectionError):
             requests.get(urljoin(server.application_url, "/"))
 
+    def test_application_reference(self):
+        server = WSGITestServer.create("tests.test_server.application")
+        try:
+            response = requests.get(urljoin(server.application_url, "/"))
+            self.assertEqual(response.status_code, 200)
+        finally:
+            server.terminate()
+
 
 class AppServerTestCase(TestCase):
     def setUp(self):

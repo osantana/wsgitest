@@ -1,6 +1,7 @@
-from importlib import import_module
+# coding: utf-8
 
-__author__ = 'osantana'
+
+from importlib import import_module
 
 
 def get_application(dotted_path):
