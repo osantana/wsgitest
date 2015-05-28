@@ -5,6 +5,7 @@ python:
   - pypy
 install:
   - pip install coveralls
+  - python setup.py -q install
 script:
   nosetests --with-coverage --cover-package=wsgitest
 after_success:
