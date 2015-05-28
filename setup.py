@@ -59,12 +59,5 @@ setup(
     url='http://github.com/osantana/wsgitest',
     download_url='https://github.com/osantana/wsgitest/tarball/{}'.format(version),
     cmdclass={'version': VersionCommand},
-    test_requires=[
-        "werkzeug",
-        "nose",
-        "coverage",
-        "requests",
-        "tox",
-    ],
     test_suite="tests",
 )
