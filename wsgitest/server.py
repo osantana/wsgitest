@@ -85,3 +85,11 @@ class WSGITestServer(multiprocessing.Process):
         server.start()
         server.wait()
         return server
+
+    def __enter__(self):
+        self.start()
+        self.wait()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.terminate()

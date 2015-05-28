@@ -15,7 +15,7 @@ from requests import ConnectionError
 
 from werkzeug.wrappers import Request, Response
 
-from wsgitest.server import WSGITestServer
+from wsgitest import WSGITestServer
 
 
 @Request.application
@@ -35,12 +35,15 @@ class ServerTestCase(TestCase):
             requests.get(urljoin(server.application_url, "/"))
 
     def test_application_reference(self):
-        server = WSGITestServer.create("tests.test_server.application")
-        try:
+        with WSGITestServer("tests.test_server.application") as server:
             response = requests.get(urljoin(server.application_url, "/"))
             self.assertEqual(response.status_code, 200)
-        finally:
-            server.terminate()
+
+    def test_specific_host_and_port(self):
+        with WSGITestServer(application, "0.0.0.0", 4000) as server:
+            self.assertEqual(server.application_url, "http://0.0.0.0:4000/")
+            response = requests.get(urljoin(server.application_url, "/"))
+            self.assertEqual(response.status_code, 200)
 
 
 class AppServerTestCase(TestCase):

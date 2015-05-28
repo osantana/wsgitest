@@ -1,3 +1,10 @@
+0.2.0
+=====
+
+  - Support for context managers to start/stop servers
+  - Add aliases to make easier to import WSGITestServer and get_application
+  - Add a basic documentation
+
 0.1.1
 =====
 
