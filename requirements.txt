@@ -1,0 +1,5 @@
+werkzeug
+nose
+coverage
+requests
+tox

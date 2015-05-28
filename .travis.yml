@@ -1,0 +1,11 @@
+language: python
+python:
+  - 2.7
+  - 3.4
+  - pypy
+install:
+  - pip install coveralls
+script:
+  nosetests --with-coverage --cover-package=wsgitest
+after_success:
+  - coveralls
